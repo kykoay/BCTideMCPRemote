@@ -33,7 +33,9 @@ class AuthenticationMiddleware(BaseHTTPMiddleware):
         # TEMP: Bypass auth to test MCP connection (remove after debugging)
         return await call_next(request)
         
+        # Original auth logic below - re-enable after testing
         if request.url.path.startswith("/.well-known/"):
+            return await call_next(request)
         
         try:
             auth_header = request.headers.get("Authorization") 
